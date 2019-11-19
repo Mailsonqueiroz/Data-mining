@@ -20,7 +20,7 @@ def get_ufersa_dadosusina_page(dadosusina):
     response = session.post(URL2, data=params)
     return response
 
-def print_list_ufersa_professors(dadosusina):
+def print_list_ufersa_medicoes(dadosusina):
     response = get_ufersa_dadosusina_page(dadosusina)
     dadosusina_page = html.fromstring(response.text)
     hora = dadosusina_page.xpath('//td[@class="base-grid-item-cell"]/text()')
@@ -28,11 +28,9 @@ def print_list_ufersa_professors(dadosusina):
     for hora, producao, in zip(hora, producao):
         print'{0},"{1}","{2}"'.format(hora, producao)
 
-#This code should be execute in terminal like:
-#cat siapes | time parallel -j+0 --progress python professors_information.py {} > professors_information.csv
 if __name__ == "__main__":
 
     URL = "https://www.sunnyportal.com/Templates/PublicPage.aspx?page=3e8a1839-a364-4367-95d5-7ef5b94ea2bf"
     URL2 = "https://www.sunnyportal.com/Templates/PublicChartValues.aspx?ID=00000000-0000-0000-0000-000000000000&endTime=12/11/2019 23:59:59&splang=pt-PT&plantTimezoneBias=-120&name=Dia 2019-11-12"
 
-print_list_ufersa_professors(dadosusina)
+print_list_ufersa_medicoes(dadosusina)
